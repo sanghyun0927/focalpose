@@ -63,14 +63,19 @@ if __name__ == "__main__":
         TCO = np.vstack([np.hstack([R_cars @ Rz @ Rx.T @ Ry, R_cars @ t]), [0, 0, 0, 1]])
         K = get_K(entry, rgb)
 
-        mesh = mesh_db.select([entry['model_id']]).points
-        uv = project_points(mesh, torch.tensor(K).unsqueeze(0).float(), torch.tensor(TCO).unsqueeze(0).float())
-        bbox = boxes_from_uv(uv).cpu().numpy()[0]
+        try:
+            mesh = mesh_db.select([entry['model_id']]).points
+            uv = project_points(mesh, torch.tensor(K).unsqueeze(0).float(), torch.tensor(TCO).unsqueeze(0).float())
+            bbox = boxes_from_uv(uv).cpu().numpy()[0]
 
-        entry_dict = dict(
-            K=K, TCO=TCO, bbox=bbox, model_id=entry['model_id'], img=key
-        )
-        df_list.append(entry_dict)
+            entry_dict = dict(
+                K=K, TCO=TCO, bbox=bbox, model_id=entry['model_id'], img=key
+            )
+            df_list.append(entry_dict)
+            del K, TCO, bbox, entry
+        except:
+            continue
+
 
     df = pd.DataFrame(df_list)
     if args.dataset.lower() == 'stanfordcars3d':
@@ -99,14 +104,18 @@ if __name__ == "__main__":
         TCO = np.vstack([np.hstack([R_cars @ Rz @ Rx.T @ Ry, R_cars @ t]), [0, 0, 0, 1]])
         K = get_K(entry, rgb)
 
-        mesh = mesh_db.select([entry['model_id']]).points
-        uv = project_points(mesh, torch.tensor(K).unsqueeze(0).float(), torch.tensor(TCO).unsqueeze(0).float())
-        bbox = boxes_from_uv(uv).cpu().numpy()[0]
+        try:
+            mesh = mesh_db.select([entry['model_id']]).points
+            uv = project_points(mesh, torch.tensor(K).unsqueeze(0).float(), torch.tensor(TCO).unsqueeze(0).float())
+            bbox = boxes_from_uv(uv).cpu().numpy()[0]
 
-        entry_dict = dict(
-            K=K, TCO=TCO, bbox=bbox, model_id=entry['model_id'], img=key
-        )
-        df_list.append(entry_dict)
+            entry_dict = dict(
+                K=K, TCO=TCO, bbox=bbox, model_id=entry['model_id'], img=key
+            )
+            df_list.append(entry_dict)
+            del K, TCO, bbox, entry
+        except:
+            continue
 
     df = pd.DataFrame(df_list)
     if args.dataset.lower() == 'stanfordcars3d':
