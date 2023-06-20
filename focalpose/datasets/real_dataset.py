@@ -131,8 +131,10 @@ class CompCars3DDataset:
         self.train = train
         if self.train:
             self.index = pd.read_pickle((self.ds_dir / 'train_anno_preprocessed.pkl').as_posix())
+            self.index = pd.DataFrame(self.index)
         else:
             self.index = pd.read_pickle((self.ds_dir / 'test_anno_preprocessed.pkl').as_posix())
+            self.index = pd.DataFrame(self.index)
         urdf_ds = make_urdf_dataset('compcars3d')
         self.all_labels = [obj['label'] for _, obj in urdf_ds.index.iterrows()]
 
