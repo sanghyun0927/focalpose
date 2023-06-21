@@ -1,6 +1,6 @@
 pinocchio
 indexed-bzip2
-coloramadask
+colorama
 dask
 dask-jobqueue
 imageio
