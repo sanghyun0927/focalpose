@@ -1,5 +1,5 @@
 import numpy as np
-import pinocchio as pin
+import pin
 import eigenpy
 eigenpy.switchToNumpyArray()
 
