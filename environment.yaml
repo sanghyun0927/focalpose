@@ -1,8 +1,15 @@
 name: focalpose
+version: 0.0
+
 channels:
    - conda-forge
    - pytorch
    - defaults
+specs:
+  - python =3.7  # Python MUST be version 3.7
+  - pip
+  - conda
+  - mamba  # mamba is not needed but recommended
 dependencies:
   - python=3.7.11=h12debd9_0
   - pinocchio=2.6.4
@@ -51,3 +58,11 @@ dependencies:
       - ipykernel==5.1.3
       - scipy==1.4.1
       - pywavefront==1.3.1
+      
+# Pip dependencies are NOT recommended. If you do need them
+# uncomment the line below and edit `pip-dependencies.sh`.
+# post_install: pip-dependencies.sh
+
+# do not edit below this line
+# ---------------------------
+installer_type: sh
