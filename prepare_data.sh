@@ -1,4 +1,4 @@
-cd ./local_data/
+cd /content/focalpose/local_data/
 
 mkdir -p ./pix3d ./StanfordCars ./CompCars ./experiments
 
